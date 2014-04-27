@@ -1,19 +1,19 @@
-<?php
+﻿<?php
 require("/emsincludes/config.php");
-$daystr = array("0" => "Montag",
-		"1" => "Dienstag",
-		"2" => "Mittwoch",
-		"3" => "Donnerstag",
-		"4" => "Freitag",
-		"5" => "Samstag",
-		"6" => "Sonntag");
-$daystr2 = array("monday" => "Montag",
-		 "tuesday" => "Dienstag",
-		 "wednesday" => "Mittwoch",
-	 	 "thursday" => "Donnerstag",
-		 "friday" => "Freitag",
-		 "saturday" => "Samstag",
-		 "sunday" => "Sonntag");
+$daystr = array("0" => "Poniedziałek",
+		"1" => "Wtorek",
+		"2" => "Środa",
+		"3" => "Czwartek",
+		"4" => "Piątek",
+		"5" => "Sobota",
+		"6" => "Niedziela");
+$daystr2 = array("monday" => "Poniedziałek",
+		 "tuesday" => "Wtorek",
+		 "wednesday" => "Środa",
+	 	 "thursday" => "Czwartek",
+		 "friday" => "Piątek",
+		 "saturday" => "Sobota",
+		 "sunday" => "Niedziela");
 
 function flush_buffers(){ 
      ob_end_flush(); 
@@ -31,12 +31,12 @@ function open_ems(){
     $ems_socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
 
     if ($ems_socket === false) {
-      die ("FATAL: Keine Verbindung zum EMS-Bus!\nGrund: " . socket_strerror(socket_last_error($ems_socket)) . "\n");
+      die ("FATAL: Błąd połączenia z EMS-Bus!\nError: " . socket_strerror(socket_last_error($ems_socket)) . "\n");
     }
 
     $result = socket_connect($ems_socket, $address, $service_port);
     if ($result === false) {
-      die ("FATAL: Keine Verbindung zum EMS-Bus!\nGrund: " . socket_strerror(socket_last_error($ems_socket)) . "\n");
+      die ("FATAL: Błąd połaczenia z EMS-Bus!\nError: " . socket_strerror(socket_last_error($ems_socket)) . "\n");
     }
     socket_set_option($ems_socket, SOL_SOCKET, SO_RCVTIMEO, array('sec'=>0, 'usec'=>5000));
   }
@@ -269,10 +269,10 @@ function schedule2graph($sch,$outfn){
     $p = popen("gnuplot", "w");
     fwrite($p,"set terminal png font 'arial' 12 size 800, 450\n");
      fwrite($p,"set grid lc rgb '#aaaaaa' lt 1 lw 0,5\n");
-     fwrite($p,"set title 'Schaltzeiten'\n");
+     fwrite($p,"set title 'Czsy przełączania'\n");
      fwrite($p,"set xdata time\n");
-     fwrite($p,"set xlabel 'Zeit'\n");
-     fwrite($p,"set ylabel 'Reduziert / Normal'\n");
+     fwrite($p,"set xlabel 'Czas'\n");
+     fwrite($p,"set ylabel 'Zredukowany / Normalny'\n");
      fwrite($p,"set timefmt '%Y-%m-%d %H:%M:%S'\n");
      fwrite($p,"set format x '%H:%M'\n");
      fwrite($p,"set xtics 3600 rotate by -45\n");
@@ -402,7 +402,7 @@ function getActSchedule($src){
 function getEmsStatusCodes(){
   global $mysql_host, $mysql_user, $mysql_pass;
   $link=mysql_connect($mysql_host, $mysql_user, $mysql_pass)
-     or die("Keine Verbindung zur Datenbank m�glich: " . mysql_error());
+     or die("Keine Verbindung zur Datenbank möglich: " . mysql_error());
   mysql_query("use ems_data");
      
   $result = mysql_query("SELECT a.value as sc, b.value as fc, a.starttime as time ".

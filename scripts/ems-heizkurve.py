@@ -18,7 +18,7 @@ def do_plot():
 
     process = subprocess.Popen("gnuplot", shell = False, stdin = subprocess.PIPE)
     process.stdin.write("set terminal png font 'arial' 12 size 800, 450\n")
-    process.stdin.write("set grid lc rgb '#aaaaaa' lt 1 lw 0,5\n")
+#    process.stdin.write("set grid lc rgb '#aaaaaa' lt 1 lw 0,5\n")
     process.stdin.write("set title 'Heizkurve'\n")
     process.stdin.write("set xrange [-10:20]\n")
     process.stdin.write("set yrange [5:45]\n")

@@ -48,7 +48,7 @@ def get_time_format():
 
 def do_graphdata(sensor, filename, ypos):
     datafile = open(filename, "w")
-    process = subprocess.Popen(["mysql", "-A", "-u%s" % config.mysql_user, "-p%s" % config.mysql_password, config.mysql_db_name ],
+    process = subprocess.Popen(["mysql", "-A", "-u%s" % "emsdata", "-p%s" % "emsdata", "ems_data" ],
                                shell = False, stdin = subprocess.PIPE, stdout = datafile)
 
     if sensor < 100:
@@ -89,7 +89,7 @@ def do_plot(name, filename, ylabel, definitions):
 
     process = subprocess.Popen("gnuplot", shell = False, stdin = subprocess.PIPE)
     process.stdin.write("set terminal png font 'arial' 12 size 800, 450\n")
-    process.stdin.write("set grid lc rgb '#aaaaaa' lt 1 lw 0,5\n")
+#    process.stdin.write("set grid lc rgb '#aaaaaa' lt 1 lw 0,5\n")
     process.stdin.write("set title '%s'\n" % name)
     process.stdin.write("set xdata time\n")
     process.stdin.write("set xlabel 'Datum'\n")

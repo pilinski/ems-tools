@@ -1,2 +1,2 @@
-BINDIR="/home/programming/Heizung/ems-tools/scripts/"
-GRAPHDIR="/home/htdocs/moosy.net/www/graphs/"
+BINDIR="/opt/ems-tools/scripts/"
+GRAPHDIR="/var/www/ems/graphs/"
