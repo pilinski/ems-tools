@@ -268,7 +268,7 @@ function schedule2graph($sch,$outfn){
 
     $p = popen("gnuplot", "w");
     fwrite($p,"set terminal png font 'arial' 12 size 800, 450\n");
-     fwrite($p,"set grid lc rgb '#aaaaaa' lt 1 lw 0,5\n");
+     fwrite($p,"set grid lc rgb '#aaaaaa' lt 1 lw 0.5\n");
      fwrite($p,"set title 'Czsy przełączania'\n");
      fwrite($p,"set xdata time\n");
      fwrite($p,"set xlabel 'Czas'\n");
